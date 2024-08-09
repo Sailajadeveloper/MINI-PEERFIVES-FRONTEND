@@ -1,0 +1,85 @@
+.card {
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .card th,
+  .card td {
+    padding: 12px;
+    text-align: left; 
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .card th {
+    background-color: #f2f2f2;
+  }
+  
+  .card tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+
+
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Group styling for each form element */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  /* Label styling */
+  .form-container label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: #333;
+  }
+  
+  /* Input and Select field styling */
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+  
+  /* Styling for buttons */
+  .form-button {
+    /* width: 48%; */
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin: 10px 1%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  /* Button hover effect */
+  .form-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Read-only input styling (for P5 Balance) */
+  .form-control[readonly] {
+    background-color: #e9ecef;
+  }
+  
