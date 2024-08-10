@@ -1,29 +1,41 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import style from "./allpages.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { get } from "../services/apiservices";
 
 const RewardsList = () => {
+  const { id } = useParams();
+  //(id, "==id"); // Should log the ID from the URL
+  const effectRan = useRef(false);
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const dummyData = [
-    {
-      sno: 1,
-      id: 1,
-      name: "Vamsi",
-      p5Balance: 0,
-      rewardBalance: 0,
-      login: 0,
-    },
-    {
-      sno: 2,
-      id: 2,
-      name: "Vamsi",
-      p5Balance: 0,
-      rewardBalance: 0,
-      login: 0,
-    },
-  ];
-
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (effectRan.current === false && id && id !== null && id != '' && id != undefined) {
+      
+      const fetchData = async () => {
+        try {
+          const res = await get(`users/${id}/rewards`);
+          setData(res?.result?.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchData();
+      return () => {
+        effectRan.current = true;
+      };
+    }
+  }, [id]);
+  let sno = 1;
+  if (data.length === 0) {
+    return (
+      <div className={style.card}>
+        <div>
+          <h4>No Data Found</h4>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className={style.card}>
       <div>
@@ -33,20 +45,18 @@ const RewardsList = () => {
         <thead>
           <tr>
             <th>S No</th>
-            <th>User Name</th>
-            <th>P5 Balance</th>
-            <th>Reward Balance</th>
-            <th>Login</th>
+            <th>Given User Name</th>
+            <th>Points Recived</th>
+            <th>Date Time</th>
           </tr>
         </thead>
         <tbody>
-          {dummyData.map((data) => (
-            <tr key={data.id}>
-              <td>{data.sno}</td>
-              <td>{data.name}</td>
-              <td>{data.p5Balance}</td>
-              <td>{data.rewardBalance}</td>
-              <td>{data.login}</td>
+          {data.map((reward) => (
+            <tr key={reward.id}>
+              <td>{sno++}</td>
+              <td>{reward.given_by_name}</td>
+              <td>{reward.points}</td>
+              <td>{reward.timestamp}</td>
             </tr>
           ))}
         </tbody>

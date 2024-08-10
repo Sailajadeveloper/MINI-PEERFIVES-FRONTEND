@@ -2,7 +2,7 @@ import axios from "axios";
 
 let BaseUrl = "http://localhost:4002/";
 const post = async (url, data) => {
-    console.log(url,"==url")
+    //(url,"==url")
     const response = await axios.post(BaseUrl+url, data);
     return response.data;
 };
